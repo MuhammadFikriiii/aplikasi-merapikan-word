@@ -1,0 +1,1 @@
+const fs=require('fs');const mammoth=require('mammoth');const cheerio=require('cheerio');mammoth.convertToHtml({path:'public/COVER 2026.docx'}).then(r=>{const $=cheerio.load(r.value);img.each((i,el)=>{console.log(.attr('src').substring(0,30))});console.log('texts:',p.text())})
