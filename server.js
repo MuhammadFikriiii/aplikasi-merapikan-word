@@ -2,14 +2,15 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const { processWord } = require('./utils/wordProcessor');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Ensure uploads and output dirs exist
-const uploadsDir = path.join(__dirname, 'uploads');
-const outputDir = path.join(__dirname, 'output');
+const uploadsDir = path.join(os.tmpdir(), 'uploads');
+const outputDir = path.join(os.tmpdir(), 'output');
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
 
@@ -107,6 +108,10 @@ app.get('/api/download/:filename', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Rapikan Word server running at http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Rapikan Word server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
