@@ -52,6 +52,7 @@ app.post('/api/process', upload.single('document'), async (req, res) => {
 
     // Get options from request
     const options = {
+      coverType: req.body.coverType || '2026',
       fontFamily: req.body.fontFamily || 'Times New Roman',
       fontSize: parseInt(req.body.fontSize) || 11,
       lineSpacing: parseFloat(req.body.lineSpacing) || 1.5,

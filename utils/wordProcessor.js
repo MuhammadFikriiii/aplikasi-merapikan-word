@@ -39,6 +39,7 @@ function ptToHalfPoint(pt) {
 
 async function processWord(inputPath, outputPath, options = {}) {
   const {
+    coverType = '2026',
     fontFamily = 'Times New Roman',
     fontSize = 11,
     lineSpacing = 1.5,
@@ -1033,9 +1034,10 @@ async function processWord(inputPath, outputPath, options = {}) {
 
   const buffer = await Packer.toBuffer(doc);
 
-  // ── Gabungkan dengan COVER 2026.docx lalu inject ulang footer ──
+  // ── Gabungkan dengan Cover lalu inject ulang footer ──
   let finalBuffer = buffer;
-  const coverPath = path.join(__dirname, '..', 'public', 'COVER 2026.docx');
+  const coverFileName = coverType === 'lama' ? 'COVER LAMA.docx' : 'COVER 2026.docx';
+  const coverPath = path.join(__dirname, '..', 'public', coverFileName);
 
   if (fs.existsSync(coverPath)) {
     try {

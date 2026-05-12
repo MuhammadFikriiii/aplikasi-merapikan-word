@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('document', selectedFile);
         
         // Append options
+        formData.append('coverType', document.getElementById('coverType').value);
         formData.append('fontFamily', document.getElementById('fontFamily').value);
         formData.append('fontSize', document.getElementById('fontSize').value);
         formData.append('lineSpacing', document.getElementById('lineSpacing').value);
